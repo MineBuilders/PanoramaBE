@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--inputs', type=str, default=str(os.getcwd()))
 args = parser.parse_args()
 
-resolve_root = args.inputs
+resolve_root = os.path.abspath(args.inputs)
 out_path = os.path.join(resolve_root, "panorama.png")
 quality_para = 0
 target_size_w = 3000
