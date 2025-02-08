@@ -1,4 +1,5 @@
 param (
+    [string]$Outputs = $PWD.Path,
     [switch]$NoCrop
 )
 
@@ -52,7 +53,7 @@ function Start-Screenshot {
     $Graphic.CopyFromScreen($Offset, [System.Drawing.Point]::Empty, $Image.Size)
 
     $FormatPNG = [System.Drawing.Imaging.ImageFormat]::Png
-    $Image.Save($PWD.Path + "\" + $SaveName + ".png", $FormatPNG)
+    $Image.Save($Outputs + "\" + $SaveName + ".png", $FormatPNG)
 
     $Graphic.Dispose()
     $Image.Dispose()

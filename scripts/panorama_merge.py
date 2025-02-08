@@ -1,8 +1,13 @@
+import argparse
 import os
 import py360convert
 import cv2
 
-resolve_root = os.getcwd()
+parser = argparse.ArgumentParser()
+parser.add_argument('--inputs', type=str, default=str(os.getcwd()))
+args = parser.parse_args()
+
+resolve_root = args.inputs
 out_path = os.path.join(resolve_root, "panorama.png")
 quality_para = 0
 target_size_w = 3000
