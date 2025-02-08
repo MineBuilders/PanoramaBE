@@ -1,3 +1,11 @@
+<#
+Copyright (C) 2025 Cdm2883
+
+This file is part of PanoramaBE.
+
+This software is licensed under the GNU General Public License v2.
+#>
+
 param(
     [Parameter(Mandatory=$true)]
     [string]$Hugin,
