@@ -1,6 +1,7 @@
 param (
     [string]$Outputs = $PWD.Path,
-    [switch]$NoCrop
+    [switch]$NoCrop,
+    [int]$Random = 0
 )
 
 function Resolve-Path {
@@ -99,6 +100,20 @@ Start-Screenshot -SaveName "panorama_4"
 Invoke-Command -Command "tp @s ~~~ 0 90"
 Start-Sleep -Seconds 1
 Start-Screenshot -SaveName "panorama_5"
+
+for ($i = 0; $i -lt $Random; $i++) {
+    $RandomInteger1 = Get-Random -Minimum 0 -Maximum 361
+    $RandomDecimal1 = (Get-Random -Minimum 0 -Maximum 1) / 10
+    $RandomNumber1 = [math]::Round($RandomInteger1 + $RandomDecimal1, 1)
+
+    $RandomInteger2 = Get-Random -Minimum -90 -Maximum 91
+    $RandomDecimal2 = (Get-Random -Minimum 0 -Maximum 1) / 10
+    $RandomNumber2 = [math]::Round($RandomInteger2 + $RandomDecimal2, 1)
+
+    Invoke-Command -Command "tp @s ~~~ $RandomNumber1 $RandomNumber2"
+    Start-Sleep -Seconds 1
+    Start-Screenshot -SaveName "panorama_$($i + 6)"
+}
 
 Switch-Fullscreen
 
