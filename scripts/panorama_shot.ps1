@@ -81,6 +81,10 @@ function Start-Screenshot {
 
 Write-Host "Panorama shooting will start in 5 seconds..."
 
+if (-not $NoCrop) {
+    Write-Host "For better outputs, please set game fov to 82!"
+}
+
 Start-Sleep -Seconds 5
 
 Switch-Fullscreen
