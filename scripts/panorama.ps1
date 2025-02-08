@@ -10,6 +10,8 @@ param (
     [string]$Path = $PWD.Path
 )
 
+$ErrorActionPreference = "Stop"
+
 if (-not [System.IO.Path]::IsPathRooted($Path)) {
     $Path = Join-Path $PWD.Path $Path
 }
@@ -86,8 +88,45 @@ if ($Action -ne "2") {
     }
 
 } else {
-    Write-Warning "WIP"
-    exit
+
+    $Hugin = "C:\Program Files\Hugin\bin"
+    if (-not (Test-Path $Hugin)) {
+        $Hugin = "D:\Program Files\Hugin\bin"
+        if (-not (Test-Path $Hugin)) {
+            Write-Host "Have you installed Hugin?"
+            $Hugin = Read-Host "If so, input the absolute bin path (like D:\Program Files\Hugin\bin)"
+            if (-not (Test-Path $Hugin)) {
+                Clear-Host
+                Write-Warning "You haven't install Hugin yet!"
+                exit
+            }
+        }
+    }
+
+    Write-Host -ForegroundColor Green "Goto Settings > Video > Field of View,"
+    $FOV = Read-Host "And tell me the value"
+    $FOV = [decimal]$FOV
+
+    Write-Host
+    Write-Host "Would you like more random shot?"
+    $Random = Read-Host "How many would you like? (default: 3)"
+    if (-not $Random) { $Random = 3 }
+    $Random = [int]$Random
+
+    Write-Host
+    Write-Host -ForegroundColor Yellow "Are you ready?"
+    Read-Host "Then press Enter, shooting will start in 5 seconds..."
+    Clear-Host
+
+    & $PanoramaShot -Outputs $Path -NoCrop -Random $Random
+    Clear-Host
+
+    Read-Host "Then press Enter, start run hugin..."
+
+    & $PanoramaHugin -Hugin $Hugin -FOV $FOV -Inputs $Path -CubeMap
+    Clear-Host
+
+    $Path = Join-Path $Path "hugin"
 }
 
 $Answer = Read-Host "Would you like a resource pack? (Y/n)"
