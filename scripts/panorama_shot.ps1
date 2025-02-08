@@ -3,6 +3,17 @@ param (
     [switch]$NoCrop
 )
 
+function Resolve-Path {
+    param([string]$Path)
+    
+    if (-not [System.IO.Path]::IsPathRooted($Path)) {
+        $Path = Join-Path $PWD.Path $Path
+    }
+    return [System.IO.Path]::GetFullPath($Path)
+}
+
+$Outputs = Resolve-Path -Path $Outputs
+
 Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
