@@ -76,16 +76,17 @@ Copy-Item -Path $Panorama3 -Destination (Join-Path $UI "panorama_3.png")
 Copy-Item -Path $Panorama4 -Destination (Join-Path $UI "panorama_4.png")
 Copy-Item -Path $Panorama5 -Destination (Join-Path $UI "panorama_5.png")
 
-$Output = Join-Path $Inputs "$Name.zip"
+$NamePath = $Name -replace '[:*?"<>|\\/]', '_'
+$Output = Join-Path $Inputs "$NamePath.zip"
 Get-ChildItem -Path $Temp | Compress-Archive -DestinationPath $Output
 
-$McPack = Join-Path $Inputs "$Name.mcpack"
+$McPack = Join-Path $Inputs "$NamePath.mcpack"
 if (Test-Path $McPack) {
-    $Answer = Read-Host "$Name.mcpack already exist, delete it? (Y/n)"
+    $Answer = Read-Host "$NamePath.mcpack already exist, delete it? (Y/n)"
     if ($Answer -eq "n") { exit }
     Remove-Item -Path $McPack
 }
 
-Rename-Item -Path $Output -NewName "$Name.mcpack"
+Rename-Item -Path $Output -NewName "$NamePath.mcpack"
 
 Remove-Item -Path $Temp -Recurse -Force
