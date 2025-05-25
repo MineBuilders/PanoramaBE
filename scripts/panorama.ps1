@@ -54,6 +54,7 @@ if (-not (Test-Path $PanoramaShot) `
 
 
 $ESC = [char]27
+Write-Host
 Write-Host -ForegroundColor Yellow "$ESC[1m     ____                                               ____  ______"
 Write-Host -ForegroundColor Yellow "$ESC[1m    / __ \____ _____  ____  _________ _____ ___  ____ _/ __ )/ ____/ "
 Write-Host -ForegroundColor Yellow "$ESC[1m   / /_/ / __ ``/ __ \/ __ \/ ___/ __ ``/ __ ``__ \/ __ ``/ __  / __/    "

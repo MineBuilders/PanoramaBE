@@ -4,9 +4,15 @@
 
 ## 🛠️ Usage
 
-Download all the things in [./scripts](scripts), and then put them **together**!
+To get started, simply copy and paste the following command into your PowerShell terminal:
 
-You could just simply execute the helper [panorama.ps1](scripts/panorama.ps1):
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MineBuilders/PanoramaBE/main/scripts/panorama.ps1" -OutFile "$env:TEMP\panorama.ps1"; & "$env:TEMP\panorama.ps1" -Path $PWD.Path
+```
+
+Alternatively, you can manually download everything from the [./scripts](scripts) directory and keep the files **together in the same directory**.
+
+Once downloaded, just run the helper script [panorama.ps1](scripts/panorama.ps1):
 
 ```
      ____                                               ____  ______
