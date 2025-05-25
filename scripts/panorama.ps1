@@ -31,7 +31,25 @@ if (-not (Test-Path $PanoramaShot) `
     Write-Host -NoNewline "and then you must put them "
     Write-Host -NoNewline -ForegroundColor Red "TOGETHER"
     Write-Host "!"
-    exit
+    Write-Host
+
+    $AutoDownload = Read-Host "Would you like to download automatically from github? (Y/n)"
+    if ($AutoDownload -eq "n") { exit }
+    $Files = @{
+        "panorama_shot.ps1"  = $PanoramaShot
+        "panorama_merge.py"  = $PanoramaMerge
+        "panorama_hugin.ps1" = $PanoramaHugin
+        "panorama_pack.ps1"  = $PanoramaPack
+    }
+    foreach ($Name in $Files.Keys) {
+        $Path = $Files[$Name]
+        $Url = "https://raw.githubusercontent.com/MineBuilders/PanoramaBE/main/scripts/$Name"
+        if (-not (Test-Path $Path)) {
+            Write-Host "Downloading $Name..."
+            Invoke-WebRequest -Uri $Url -OutFile $Path -UseBasicParsing
+        }
+    }
+    Clear-Host
 }
 
 
