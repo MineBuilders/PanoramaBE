@@ -79,6 +79,9 @@ if ($Action -ne "2") {
     Write-Host "!"
     Write-Host -ForegroundColor DarkGray "$ESC[3m(Settings > Video > Field of View)"
     Write-Host
+    Write-Host -ForegroundColor DarkGray "If you're using an injector (like Flarial),"
+    Write-Host -ForegroundColor DarkGray "try setting the FOV to 90 in the injector settings for better results!"
+    Write-Host
     Read-Host "Then press Enter, shooting will start in 5 seconds..."
     Clear-Host
 
